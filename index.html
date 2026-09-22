@@ -3,71 +3,369 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Adeliax — Soluciones de IA</title>
-<meta name="description" content="Adeliax, agencia de inteligencia artificial. Automatización, IA aplicada y soluciones a medida para tu negocio.">
+<title>Adeliax — Automatización, web e IA para tu negocio</title>
+<meta name="description" content="Automatizo las tareas que te roban el día, creo webs que aparecen en Google y te enseño a usar la IA sin tecnicismos. Adeliax, con Teresa.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="stylesheet" href="style.css">
+<script>document.documentElement.classList.add("js");</script>
 </head>
 <body>
+
 <header class="nav">
   <div class="container nav__inner">
-    <span class="logo">Adeliax</span>
-    <nav>
+    <a class="logo" href="#inicio" aria-label="Adeliax, inicio">
+      <span class="logo-mark"><img src="img/logo-icono.png" alt="" width="54" height="40"><span class="node n1"></span><span class="node n2"></span><span class="node n3"></span><span class="node n4"></span><span class="node n5"></span><span class="node n6"></span></span>
+      <span class="logo__text">adelia<em>x</em></span>
+    </a>
+    <nav class="nav__links">
       <a href="#servicios">Servicios</a>
-      <a href="#sobre">Sobre nosotros</a>
-      <a href="#contacto">Contacto</a>
+      <a href="#como-trabajo">Cómo trabajo</a>
+      <a href="#sobre">Sobre mí</a>
+      <a href="#faq">Preguntas</a>
     </nav>
+    <a class="btn btn--small" data-wa href="#contacto">Hablemos</a>
   </div>
 </header>
 
-<main>
-  <section class="hero">
-    <div class="container">
-      <h1>Inteligencia Artificial al servicio de tu negocio</h1>
-      <p class="hero__subtitle">Adeliax diseña e implementa soluciones de IA a medida para automatizar procesos y potenciar resultados.</p>
-      <a class="btn" href="#contacto">Hablemos de tu proyecto</a>
-    </div>
-  </section>
+<main id="inicio">
 
-  <section id="servicios" class="section">
-    <div class="container">
-      <h2>Servicios</h2>
-      <div class="cards">
-        <article class="card">
-          <h3>Automatización con IA</h3>
-          <p>Flujos y agentes inteligentes que eliminan tareas repetitivas y aceleran tu operativa.</p>
-        </article>
-        <article class="card">
-          <h3>Chatbots y asistentes</h3>
-          <p>Asistentes conversacionales a medida integrados en tu web, WhatsApp o herramientas internas.</p>
-        </article>
-        <article class="card">
-          <h3>Consultoría en IA</h3>
-          <p>Analizamos tu negocio y diseñamos una estrategia de IA realista, medible y rentable.</p>
-        </article>
+  <!-- 1. HERO -->
+  <section class="hero">
+    <div class="container hero__grid">
+      <div class="hero__text reveal">
+        <span class="eyebrow">Automatización · Web · IA</span>
+        <h1>Tu negocio funcionando, <span class="shine">aunque tú no estés</span> pendiente de todo.</h1>
+        <p class="hero__subtitle">Automatizo las tareas que te roban el día, creo webs que aparecen en Google y te enseño a usar la IA sin tecnicismos. Tú te centras en tu negocio; lo demás funciona solo.</p>
+        <div class="cta-row">
+          <a class="btn btn--wa" data-wa href="#contacto">Escríbeme por WhatsApp</a>
+          <a class="btn btn--ghost" data-mail href="#contacto">Envíame un correo</a>
+        </div>
+        <p class="microcopy">Sin compromiso. Te respondo personalmente en menos de 24 h laborables.</p>
+      </div>
+      <div class="hero__visual reveal">
+        <div class="blob blob--1" aria-hidden="true"></div>
+        <div class="blob blob--2" aria-hidden="true"></div>
+        <img class="hero__photo" src="img/teresa-hero.jpg" alt="Teresa, fundadora de Adeliax" width="900" height="1197">
+        <!-- Notificaciones flotantes: muestran la automatización "funcionando" -->
+        <div class="notif notif--1" aria-hidden="true"><span class="notif__icon">📞</span><div><strong>Llamada atendida</strong><small>Automáticamente · hace 2 min</small></div></div>
+        <div class="notif notif--2" aria-hidden="true"><span class="notif__icon notif__icon--ok">✓</span><div><strong>Presupuesto enviado</strong><small>Sin que tú hagas nada · 21:47</small></div></div>
+        <div class="notif notif--3" aria-hidden="true"><span class="notif__icon">⭐</span><div><strong>Nuevo contacto desde Google</strong><small>Tu web trabajando por ti</small></div></div>
       </div>
     </div>
   </section>
 
-  <section id="sobre" class="section section--alt">
+  <!-- Cinta en movimiento -->
+  <div class="marquee" aria-hidden="true">
+    <div class="marquee__track">
+      <span>Atención de llamadas</span><span>Presupuestos automáticos</span><span>Recordatorios de citas</span><span>Webs que aparecen en Google</span><span>Formación en IA sin jerga</span><span>Más tiempo para ti</span><span>Atención de llamadas</span><span>Presupuestos automáticos</span><span>Recordatorios de citas</span><span>Webs que aparecen en Google</span><span>Formación en IA sin jerga</span><span>Más tiempo para ti</span>
+    </div>
+  </div>
+
+  <!-- 2. DOLORES -->
+  <section class="section">
     <div class="container">
-      <h2>Sobre Adeliax</h2>
-      <p>Somos una agencia especializada en inteligencia artificial aplicada. Ayudamos a empresas a integrar IA de forma práctica, sin complejidad innecesaria.</p>
+      <div class="section__head reveal">
+        <span class="eyebrow">¿Te suena?</span>
+        <h2>¿Tu negocio te quita más tiempo del que debería?</h2>
+        <p>Si te reconoces en alguna, no es falta de organización. Es que nadie te ha puesto las herramientas adecuadas.</p>
+      </div>
+      <div class="pains">
+        <article class="pain reveal"><span class="pain__icon">📞</span><p><strong>Pierdes llamadas</strong> porque estás atendiendo a otro cliente, y ese cliente se va con la competencia.</p></article>
+        <article class="pain reveal"><span class="pain__icon">📄</span><p><strong>Haces presupuestos a mano</strong>, uno a uno, a las diez de la noche.</p></article>
+        <article class="pain reveal"><span class="pain__icon">🔁</span><p><strong>Repites lo mismo cada día</strong>: confirmar citas, responder las mismas preguntas, mandar los mismos correos.</p></article>
+        <article class="pain reveal"><span class="pain__icon">🔍</span><p><strong>Tu web no aparece en Google</strong>, o está anticuada y no refleja lo que vales.</p></article>
+        <article class="pain reveal"><span class="pain__icon">🤖</span><p><strong>Oyes hablar de la IA a todas horas</strong>, pero no sabes por dónde empezar ni si es para ti.</p></article>
+        <article class="pain reveal"><span class="pain__icon">⏳</span><p><strong>Si tú paras, el negocio para.</strong> No hay vacaciones ni bajas que valgan.</p></article>
+      </div>
+      <p class="section__closing reveal">No tiene por qué ser así.</p>
     </div>
   </section>
 
-  <section id="contacto" class="section">
+  <!-- 3. EL CAMBIO -->
+  <section class="section section--tint">
     <div class="container">
-      <h2>Contacto</h2>
-      <p>¿Tienes un proyecto en mente? Escríbenos y lo hablamos.</p>
-      <a class="btn" href="mailto:hola@adeliax.com">hola@adeliax.com</a>
+      <div class="section__head reveal">
+        <span class="eyebrow">La solución</span>
+        <h2>Imagina tu semana con Adeliax.</h2>
+        <p>Las llamadas se atienden aunque no puedas coger el teléfono. Los presupuestos salen solos. Tus clientes te encuentran en Google y lo que ven les convence. Y la IA deja de ser un misterio para convertirse en una herramienta más de tu día a día.</p>
+      </div>
+      <div class="compare reveal">
+        <div class="compare__col compare__col--before">
+          <h3>Antes</h3>
+          <ul>
+            <li>Tú haces todo</li>
+            <li>Clientes que se pierden</li>
+            <li>Web invisible</li>
+            <li>IA = incertidumbre</li>
+          </ul>
+        </div>
+        <div class="compare__col compare__col--after">
+          <h3>Con Adeliax</h3>
+          <ul>
+            <li>Los sistemas hacen lo repetitivo</li>
+            <li>Cada contacto recibe respuesta</li>
+            <li>Web que aparece y convence</li>
+            <li>IA = ventaja práctica</li>
+          </ul>
+        </div>
+      </div>
+      <div class="center reveal">
+        <a class="btn btn--wa" data-wa href="#contacto">Cuéntame tu caso por WhatsApp</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- 4. SERVICIOS -->
+  <section id="servicios" class="section">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="eyebrow">Servicios</span>
+        <h2>Tres formas de ayudarte.</h2>
+        <p>Un mismo objetivo: que tu negocio avance sin depender de ti a cada minuto.</p>
+      </div>
+      <div class="services">
+
+        <article class="service reveal">
+          <div class="service__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
+          </div>
+          <span class="service__num">01</span>
+          <h3>Recupera tu tiempo</h3>
+          <p class="service__lead">Implanto sistemas que se encargan de las tareas repetitivas para que tu negocio no dependa de tu día a día.</p>
+          <ul class="checks">
+            <li>Atención de llamadas y mensajes, también fuera de horario.</li>
+            <li>Envío de presupuestos y seguimiento de los que no reciben respuesta.</li>
+            <li>Confirmación y recordatorio de citas.</li>
+            <li>Respuestas a las preguntas frecuentes de tus clientes.</li>
+            <li>Paso de datos entre tus herramientas (formularios, correo, hojas de cálculo, CRM).</li>
+          </ul>
+          <p class="service__result"><strong>Qué puedes esperar:</strong> horas libres cada semana, menos errores, clientes atendidos al momento y la tranquilidad de que el negocio sigue funcionando cuando tú no estás.</p>
+          <a class="link-arrow" data-wa href="#contacto">Quiero recuperar mi tiempo →</a>
+        </article>
+
+        <article class="service service--featured reveal">
+          <div class="service__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
+          </div>
+          <span class="service__num">02</span>
+          <h3>Haz que te encuentren</h3>
+          <p class="service__lead">Creo tu web para que aparezcas en Google y te diferencies. Tú no programas ni mantienes nada.</p>
+          <ul class="checks">
+            <li>Diseño a medida, bonito y coherente con tu marca.</li>
+            <li>Preparada para Google desde el primer día (SEO básico y local).</li>
+            <li>Pensada para el móvil, que es desde donde te buscan.</li>
+            <li>Con botones de contacto claros para que el visitante te escriba.</li>
+            <li>Mantenimiento incluido o a demanda: de lo técnico me ocupo yo.</li>
+          </ul>
+          <p class="service__result"><strong>Qué puedes esperar:</strong> una web de la que presumir, más visibilidad y más contactos de calidad.</p>
+          <a class="link-arrow" data-wa href="#contacto">Quiero que me encuentren →</a>
+        </article>
+
+        <article class="service reveal">
+          <div class="service__icon">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg>
+          </div>
+          <span class="service__num">03</span>
+          <h3>Pierde el miedo a la IA</h3>
+          <p class="service__lead">Formación adaptada a tu sector, sin conocimientos previos y sin jerga.</p>
+          <ul class="checks">
+            <li>Sesiones prácticas con ejemplos de tu propio negocio.</li>
+            <li>Aprendes a usar la IA para redactar, organizar, analizar y ahorrar tiempo.</li>
+            <li>A tu ritmo: individual o para tu equipo.</li>
+            <li>Sales con casos reales ya funcionando, no con teoría.</li>
+          </ul>
+          <p class="service__result"><strong>Qué puedes esperar:</strong> seguridad para usar la IA desde el día siguiente y criterio para saber qué te sirve y qué no.</p>
+          <a class="link-arrow" data-wa href="#contacto">Quiero aprender →</a>
+        </article>
+
+      </div>
+    </div>
+  </section>
+
+  <!-- 5. CÓMO TRABAJO -->
+  <section id="como-trabajo" class="section section--tint">
+    <div class="container">
+      <div class="section__head reveal">
+        <span class="eyebrow">Cómo trabajo</span>
+        <h2>Sencillo, claro y a tu medida.</h2>
+      </div>
+      <ol class="steps">
+        <li class="step reveal"><span class="step__num">1</span><h3>Hablamos</h3><p>Me cuentas tu negocio y qué te quita tiempo. Sin compromiso.</p></li>
+        <li class="step reveal"><span class="step__num">2</span><h3>Te propongo un plan</h3><p>Por escrito, con precio cerrado y plazos claros.</p></li>
+        <li class="step reveal"><span class="step__num">3</span><h3>Lo pongo en marcha</h3><p>Tú sigues con tu trabajo; yo me ocupo de todo.</p></li>
+        <li class="step reveal"><span class="step__num">4</span><h3>Te acompaño</h3><p>Te explico cómo funciona y sigo disponible para ajustes y dudas.</p></li>
+      </ol>
+      <p class="section__closing reveal">Tú no tienes que saber de tecnología. Para eso estoy yo.</p>
+    </div>
+  </section>
+
+  <!-- 6. SOBRE TERESA -->
+  <section id="sobre" class="section">
+    <div class="container about">
+      <div class="about__visual reveal">
+        <img class="about__photo" src="img/teresa.jpg" alt="Retrato de Teresa" width="900" height="1197" loading="lazy">
+        <div class="badge"><strong data-count="25">+25</strong><span>años gestionando proyectos exigentes</span></div>
+      </div>
+      <div class="about__text reveal">
+        <span class="eyebrow">Sobre mí</span>
+        <h2>Hola, soy Teresa.</h2>
+        <p>Llevo más de 25 años gestionando proyectos donde el rigor, los plazos y la precisión no son negociables: investigación clínica y proyectos de I+D+i. Ahí aprendí a ordenar procesos complejos, a detectar dónde se pierde el tiempo y a convertir la innovación en algo útil y aplicable.</p>
+        <p>Hoy pongo esa experiencia al servicio de negocios como el tuyo. Me da igual si tienes una clínica, una tienda, un despacho o un taller: los problemas se parecen mucho (demasiadas tareas manuales, poco tiempo y la sensación de que la tecnología va más rápido que tú).</p>
+        <p>Mi forma de trabajar es cercana y transparente. Te hablo claro, sin tecnicismos, y no te propongo nada que no vayas a usar.</p>
+        <ul class="trust">
+          <li><strong>+25 años</strong> gestionando proyectos exigentes y de innovación.</li>
+          <li><strong>Método:</strong> analizo antes de proponer y mido lo que implanto.</li>
+          <li><strong>Trato directo:</strong> hablas siempre conmigo, no con un call center.</li>
+          <li><strong>Rigor y confidencialidad:</strong> estoy acostumbrada a trabajar con información sensible.</li>
+        </ul>
+        <p class="signature">Teresa</p>
+        <div class="cta-row">
+          <a class="btn btn--wa" data-wa href="#contacto">Escríbeme por WhatsApp</a>
+          <a class="btn btn--ghost" data-mail href="#contacto">Envíame un correo</a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 7. CALENDLY (opcional) -->
+  <section class="section section--tint">
+    <div class="container">
+      <div class="calendly reveal">
+        <div>
+          <h2>¿Prefieres que lo hablemos con calma?</h2>
+          <p>Reserva una llamada gratuita de 20–30 minutos. Me cuentas tu situación y te digo, con total sinceridad, si puedo ayudarte y cómo.</p>
+        </div>
+        <div class="calendly__cta">
+          <a class="btn" data-calendly href="#contacto" target="_blank" rel="noopener">📅 Agendar en Calendly</a>
+          <p class="microcopy">Elige el día y la hora que mejor te vengan. Sin compromiso.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- 8. FAQ -->
+  <section id="faq" class="section">
+    <div class="container container--narrow">
+      <div class="section__head reveal">
+        <span class="eyebrow">Preguntas frecuentes</span>
+        <h2>Resolvemos tus dudas.</h2>
+      </div>
+      <div class="faq reveal">
+        <details><summary>¿Cuánto cuesta?</summary><p>Depende de lo que necesites. Cada negocio es distinto, así que primero escucho tu caso y luego te doy un presupuesto cerrado y por escrito, sin sorpresas. La primera conversación es gratuita.</p></details>
+        <details><summary>¿Cuánto se tarda?</summary><p>Una automatización sencilla puede estar lista en pocos días. Una web completa suele llevar entre 2 y 4 semanas, según el contenido. Siempre te doy los plazos por adelantado.</p></details>
+        <details><summary>¿Tengo que encargarme yo del mantenimiento de la web?</summary><p>No. Me ocupo de las actualizaciones, la seguridad y los cambios que necesites. Tú solo me dices qué quieres cambiar.</p></details>
+        <details><summary>¿Las automatizaciones son complicadas de usar?</summary><p>Todo lo contrario: están pensadas para que no tengas que hacer nada. Te explico cómo funcionan y, si algo cambia en tu negocio, las adaptamos.</p></details>
+        <details><summary>¿Qué pasa si falla algo?</summary><p>Estoy disponible para resolverlo. Hablas directamente conmigo por WhatsApp o por correo, sin tickets ni esperas eternas.</p></details>
+        <details><summary>No sé nada de IA, ¿la formación es para mí?</summary><p>Precisamente para ti. Empezamos desde cero, con ejemplos de tu sector y sin jerga. Si sabes usar el correo, puedes aprender a usar la IA.</p></details>
+        <details><summary>¿Trabajas solo con el sector sanitario?</summary><p>No. Mi experiencia viene de la investigación clínica y la innovación, pero trabajo con cualquier negocio que quiera ganar tiempo y visibilidad.</p></details>
+        <details><summary>¿Puedo empezar solo con una cosa?</summary><p>Claro. Muchos clientes empiezan con una automatización o con la web y, cuando ven los resultados, dan el siguiente paso.</p></details>
+        <details><summary>¿Mis datos y los de mis clientes están seguros?</summary><p>Sí. Trabajo con herramientas fiables, cumpliendo la normativa de protección de datos y con la confidencialidad que he aplicado durante toda mi carrera.</p></details>
+      </div>
+    </div>
+  </section>
+
+  <!-- 9. CTA FINAL -->
+  <section id="contacto" class="final">
+    <div class="container final__inner reveal">
+      <span class="logo-mark logo-mark--big"><img src="img/logo-icono-blanco.png" alt="Adeliax" width="160" height="120" loading="lazy"><span class="node n1"></span><span class="node n2"></span><span class="node n3"></span><span class="node n4"></span><span class="node n5"></span><span class="node n6"></span></span>
+      <h2>Tu tiempo vale mucho. Empecemos a recuperarlo.</h2>
+      <p>Cuéntame qué te quita horas o qué te gustaría mejorar. Te respondo personalmente y te digo cómo puedo ayudarte.</p>
+      <div class="cta-row cta-row--center">
+        <a class="btn btn--wa btn--large" data-wa href="#contacto">Escríbeme por WhatsApp</a>
+        <a class="btn btn--light btn--large" data-mail href="#contacto">Envíame un correo</a>
+      </div>
+      <p class="final__alt">¿Prefieres una llamada? <a data-calendly href="#contacto" target="_blank" rel="noopener">Agenda en Calendly →</a></p>
     </div>
   </section>
 </main>
 
+<!-- 10. FOOTER -->
 <footer class="footer">
-  <div class="container">
-    <p>&copy; 2026 Adeliax. Todos los derechos reservados.</p>
+  <div class="container footer__inner">
+    <div>
+      <img class="footer__logo" src="img/logo.png" alt="Adeliax" width="130" height="100" loading="lazy">
+      <p>Automatización, web e IA para negocios que quieren crecer sin agobios.</p>
+    </div>
+    <div class="footer__links">
+      <a data-wa href="#contacto">WhatsApp</a>
+      <a data-mail href="#contacto">hola@adeliax.com</a>
+      <a href="https://www.adeliax.com">www.adeliax.com</a>
+    </div>
+    <div class="footer__links">
+      <a href="#">Aviso legal</a>
+      <a href="#">Política de privacidad</a>
+      <a href="#">Cookies</a>
+    </div>
   </div>
+  <p class="footer__copy">&copy; 2026 Adeliax</p>
 </footer>
+
+<!-- BOTONES FLOTANTES -->
+<div class="floating">
+  <a class="fab fab--mail" data-mail href="#contacto" aria-label="Enviar un correo a Adeliax">
+    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
+    <span class="fab__tip">¿Prefieres correo? Escríbeme aquí</span>
+  </a>
+  <a class="fab fab--wa" data-wa href="#contacto" aria-label="Escribir a Teresa por WhatsApp">
+    <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.6l-.4-.3-3.8 1.2 1.2-3.7-.3-.4a10.4 10.4 0 0 1-1.7-5.8C5.1 10 10 5.3 16 5.3S26.9 10 26.9 15.8 22 26.4 16 26.4zm6-7.8c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.5 5.5 4.9 2.7 1.1 3.3.9 3.9.8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.5z"/></svg>
+    <span class="fab__tip">¿Hablamos? Te respondo por WhatsApp</span>
+  </a>
+</div>
+
+<script>
+  // ── CONFIGURACIÓN: cambia estos tres datos y se actualizan todos los botones ──
+  const WHATSAPP_NUMBER = "34616524587"; // prefijo 34 + número, sin espacios ni "+"
+  const EMAIL = "hola@adeliax.com";
+  const CALENDLY_URL = "https://calendly.com/teresagarciadonas/consultoria-gratuita-adeliax";
+
+  const waText = "Hola Teresa, he visto la web de Adeliax y me gustaría contarte mi caso.";
+  const mailSubject = "Consulta desde adeliax.com";
+
+  document.querySelectorAll("[data-wa]").forEach(a => {
+    a.href = `https://wa.me/${WHATSAPP_NUMBER}?text=${encodeURIComponent(waText)}`;
+    a.target = "_blank";
+    a.rel = "noopener";
+  });
+  document.querySelectorAll("[data-mail]").forEach(a => {
+    a.href = `mailto:${EMAIL}?subject=${encodeURIComponent(mailSubject)}`;
+  });
+  document.querySelectorAll("[data-calendly]").forEach(a => {
+    a.href = CALENDLY_URL;
+  });
+
+  // Contador animado (+25)
+  const counters = document.querySelectorAll("[data-count]");
+  const runCounter = el => {
+    const end = +el.dataset.count, t0 = performance.now(), dur = 1400;
+    const tick = t => {
+      const k = Math.min((t - t0) / dur, 1), eased = 1 - Math.pow(1 - k, 3);
+      el.textContent = "+" + Math.round(end * eased);
+      if (k < 1) requestAnimationFrame(tick);
+    };
+    requestAnimationFrame(tick);
+  };
+  if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const co = new IntersectionObserver(entries => {
+      entries.forEach(e => { if (e.isIntersecting) { runCounter(e.target); co.unobserve(e.target); } });
+    }, { threshold: 0.6 });
+    counters.forEach(el => co.observe(el));
+  }
+
+  // Aparición suave de las secciones al hacer scroll
+  const items = document.querySelectorAll(".reveal");
+  if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
+    const io = new IntersectionObserver(entries => {
+      entries.forEach(e => {
+        if (e.isIntersecting) { e.target.classList.add("is-visible"); io.unobserve(e.target); }
+      });
+    }, { threshold: 0.12 });
+    items.forEach(el => io.observe(el));
+  } else {
+    items.forEach(el => el.classList.add("is-visible"));
+  }
+</script>
 </body>
 </html>
