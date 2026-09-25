@@ -435,6 +435,10 @@ h1, h2, h3 { letter-spacing: -0.02em; line-height: 1.2; }
 }
 .trust strong { color: var(--text); }
 
+.about__linkedin { margin-top: -12px; }
+.about__linkedin a { color: var(--accent); font-weight: 700; text-decoration: none; }
+.about__linkedin a:hover { text-decoration: underline; }
+
 .signature {
   font-family: "Brush Script MT", "Segoe Script", cursive;
   font-size: 2rem;
@@ -518,6 +522,22 @@ h1, h2, h3 { letter-spacing: -0.02em; line-height: 1.2; }
 .footer__links a:hover { color: var(--accent); }
 .footer__copy { text-align: center; color: var(--text-muted); font-size: 0.82rem; margin-top: 40px; }
 
+/* ── Páginas legales ── */
+.legal { padding: 64px 0 90px; }
+.legal h1 { font-size: clamp(1.9rem, 4vw, 2.6rem); font-weight: 800; margin-bottom: 8px; }
+.legal__updated { color: var(--text-muted); font-size: 0.9rem; margin-bottom: 40px; }
+.legal h2 { font-size: 1.3rem; margin: 40px 0 12px; }
+.legal p, .legal li { color: var(--text-muted); margin-bottom: 12px; }
+.legal ul { padding-left: 22px; margin-bottom: 12px; }
+.legal strong { color: var(--text); }
+.legal a { color: var(--accent); }
+.legal__box { background: var(--bg-tint); border-radius: 16px; padding: 20px 24px; margin-bottom: 20px; }
+.legal__box p { margin-bottom: 4px; }
+.legal__table-wrap { overflow-x: auto; margin: 12px 0 20px; }
+.legal table { width: 100%; border-collapse: collapse; font-size: 0.92rem; }
+.legal th, .legal td { text-align: left; padding: 10px 12px; border: 1px solid var(--border); color: var(--text-muted); vertical-align: top; }
+.legal th { background: var(--bg-tint); color: var(--text); }
+
 /* ── Botones flotantes ── */
 .floating {
   position: fixed;
@@ -595,7 +615,7 @@ main { overflow-x: clip; }
 
 /* Logo vivo: el símbolo se dibuja y los nodos de la red se encienden en cadena */
 .logo-mark { position: relative; display: inline-block; line-height: 0; font-size: 4px; }
-.logo-mark img { animation: logo-draw 1.1s cubic-bezier(.6,.1,.2,1) both; transition: transform .4s ease; }
+.logo-mark img { animation: logo-draw .7s cubic-bezier(.6,.1,.2,1) both; transition: transform .4s ease; }
 .logo:hover .logo-mark img { transform: rotate(-6deg) scale(1.06); }
 
 @keyframes logo-draw {
@@ -610,7 +630,7 @@ main { overflow-x: clip; }
   border-radius: 50%;
   transform: translate(-50%, -50%);
   animation: node-pulse 3.2s ease-out infinite;
-  animation-delay: calc(1.1s + var(--d, 0s));
+  animation-delay: calc(.7s + var(--d, 0s));
 }
 .n1 { left: 58.1%; top: 50%;   width: 2.6%; --d: 0s; }
 .n2 { left: 72.2%; top: 47.3%; --d: .15s; }
@@ -688,9 +708,9 @@ main { overflow-x: clip; }
 }
 .notif__icon--ok { background: #dff7e8; color: #1ea85a; font-weight: 800; }
 
-.notif--1 { top: 9%;  left: -6%;  --d: 1.3s; }
-.notif--2 { top: 46%; right: -8%; --d: 2s; animation-duration: .7s, 6s; }
-.notif--3 { bottom: 9%; left: -2%; --d: 2.7s; animation-duration: .7s, 5.5s; }
+.notif--1 { top: 9%;  left: -6%;  --d: .5s; }
+.notif--2 { top: 46%; right: -8%; --d: .8s; animation-duration: .7s, 6s; }
+.notif--3 { bottom: 9%; left: -2%; --d: 1.1s; animation-duration: .7s, 5.5s; }
 
 @keyframes notif-in {
   from { opacity: 0; transform: translateY(18px) scale(.85); }
@@ -747,7 +767,9 @@ main { overflow-x: clip; }
 }
 
 /* ── Animación de aparición (solo si hay JavaScript) ── */
-.js .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+.js .reveal { opacity: 0; transform: translateY(16px); transition: opacity 0.4s ease, transform 0.4s ease; }
+/* La portada aparece casi al instante */
+.js .hero .reveal { transition-duration: 0.25s; }
 .js .reveal.is-visible { opacity: 1; transform: none; }
 
 @media (prefers-reduced-motion: reduce) {
@@ -758,9 +780,10 @@ main { overflow-x: clip; }
 /* ── Responsive ── */
 @media (max-width: 960px) {
   .hero__grid, .about, .calendly { grid-template-columns: 1fr; }
-  .hero { padding: 60px 0 80px; }
-  .hero__visual { min-height: 0; order: -1; }
-  .hero__photo { max-width: 300px; }
+  .hero { padding: 40px 0 70px; }
+  .hero__grid { gap: 40px; }
+  .hero__visual { min-height: 0; }
+  .hero__photo { max-width: 260px; }
   .pains, .services { grid-template-columns: 1fr 1fr; }
   .steps { grid-template-columns: 1fr 1fr; }
   .steps::before { display: none; }
@@ -775,6 +798,13 @@ main { overflow-x: clip; }
   .footer__inner { grid-template-columns: 1fr; }
   .cta-row .btn { width: 100%; justify-content: center; }
   .fab__tip { display: none; }
-  .floating { right: 16px; bottom: 16px; }
+  .floating { right: 12px; bottom: 12px; gap: 10px; }
+  .fab--wa { width: 50px; height: 50px; }
+  .fab--wa svg { width: 28px; height: 28px; }
+  .fab--mail { width: 40px; height: 40px; }
+  .fab--mail svg { width: 20px; height: 20px; }
+  /* Hueco al final para que los botones flotantes no tapen el pie */
+  body { padding-bottom: 110px; }
+  .hero .microcopy { padding-right: 56px; }
   .container { padding: 0 16px; }
 }
