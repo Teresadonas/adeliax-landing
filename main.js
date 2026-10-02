@@ -1,59 +1,207 @@
 (() => {
   "use strict";
 
+  const root = document.documentElement;
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
-
   const finePointer = matchMedia("(hover: hover) and (pointer: fine)").matches;
 
-  /* ── Títulos que aparecen palabra a palabra ── */
+  /* ── Pantalla de entrada ──
+     Solo la primera vez en cada visita; con "reducir movimiento" no aparece. */
+  const loader = document.getElementById("loader");
+  let seen = false;
+  try { seen = sessionStorage.getItem("adeliax-intro") === "1"; } catch (_) {}
+  const ready = () => root.classList.add("is-ready");
+  if (!loader || reduceMotion || seen) {
+    if (loader) loader.classList.add("is-gone");
+    ready();
+  } else {
+    document.body.classList.add("is-loading");
+    const t0 = performance.now();
+    let finished = false;
+    const finish = () => {
+      if (finished) return;
+      finished = true;
+      loader.classList.add("is-done");
+      document.body.classList.remove("is-loading");
+      ready();
+      try { sessionStorage.setItem("adeliax-intro", "1"); } catch (_) {}
+      setTimeout(() => loader.classList.add("is-gone"), 1300);
+    };
+    const done = () => setTimeout(finish, Math.max(0, 1300 - (performance.now() - t0)));
+    if (document.readyState === "complete") done(); else window.addEventListener("load", done);
+    setTimeout(finish, 3500); // por si la red va lenta
+  }
+
+  /* ── Títulos que aparecen palabra a palabra (respetando las cursivas) ── */
   if (!reduceMotion) {
-    document.querySelectorAll(".section__head h2, .calc h2, .about h2, .final h2").forEach(h => {
-      const words = h.textContent.trim().split(/\s+/);
-      h.setAttribute("aria-label", h.textContent.trim());
-      h.innerHTML = words.map((w, i) => `<span class="w" aria-hidden="true"><span style="--i:${i}">${w}</span></span>`).join(" ");
-      h.classList.add("split");
+    document.querySelectorAll(".split").forEach(h => {
+      h.setAttribute("aria-label", h.textContent.replace(/\s+/g, " ").trim());
+      // Que la puntuación tras una cursiva ("dudas.") no se quede sola en otra línea
+      h.querySelectorAll("em").forEach(em => {
+        const next = em.nextSibling;
+        const m = next && next.nodeType === 3 && next.textContent.match(/^[^\s]+/);
+        if (!m) return;
+        const keep = document.createElement("span");
+        keep.className = "nowrap";
+        em.replaceWith(keep);
+        keep.append(em, m[0]);
+        next.textContent = next.textContent.slice(m[0].length);
+      });
+      let i = 0;
+      const wrap = node => {
+        [...node.childNodes].forEach(child => {
+          if (child.nodeType === 3) {
+            const frag = document.createDocumentFragment();
+            child.textContent.split(/(\s+)/).forEach(part => {
+              if (!part) return;
+              if (/^\s+$/.test(part)) { frag.appendChild(document.createTextNode(" ")); return; }
+              const w = document.createElement("span"), inner = document.createElement("span");
+              w.className = "w";
+              w.setAttribute("aria-hidden", "true");
+              inner.style.setProperty("--i", i++);
+              inner.textContent = part;
+              w.appendChild(inner);
+              frag.appendChild(w);
+            });
+            child.replaceWith(frag);
+          } else if (child.nodeType === 1) {
+            wrap(child);
+          }
+        });
+      };
+      wrap(h);
     });
   }
 
-  /* ── Aparición suave de los bloques al hacer scroll ── */
-  const items = document.querySelectorAll(".reveal, .draw-on, .split");
+  /* ── Aparición al hacer scroll ── */
+  const items = document.querySelectorAll(".reveal, .reveal-img, .split");
   if ("IntersectionObserver" in window && !reduceMotion) {
+    // Las imágenes empiezan recortadas a cero, así que se observa su contenedor
+    const targets = new Map();
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add("is-visible"); io.unobserve(e.target); }
+        if (!e.isIntersecting) return;
+        (targets.get(e.target) || [e.target]).forEach(el => el.classList.add("is-visible"));
+        io.unobserve(e.target);
       });
-    }, { threshold: 0.12 });
-    items.forEach(el => io.observe(el));
+    }, { threshold: 0.15, rootMargin: "0px 0px -8% 0px" });
+    items.forEach(el => {
+      const watch = el.classList.contains("reveal-img") ? el.parentElement : el;
+      targets.set(watch, [...(targets.get(watch) || []), el]);
+      io.observe(watch);
+    });
   } else {
     items.forEach(el => el.classList.add("is-visible"));
   }
 
-  /* ── Barra de progreso, cabecera que se esconde y parallax ── */
-  const nav = document.querySelector(".nav");
+  /* ── Scroll: barra de progreso, cabecera, enlace activo, botón flotante, parallax y línea de tiempo ── */
+  const nav = document.getElementById("nav");
   const progress = document.querySelector(".progress");
+  const fab = document.querySelector(".fab");
   const parallax = [...document.querySelectorAll("[data-parallax]")];
+  const navLinks = [...document.querySelectorAll(".nav__links a")];
+  const sectionsWithId = [...document.querySelectorAll("main section[id]")];
+  const timeline = document.querySelector("[data-timeline]");
+  const tlFill = timeline && timeline.querySelector(".timeline__line span");
+  const tlItems = timeline ? [...timeline.querySelectorAll(".tl")] : [];
+  const mobileMenu = document.getElementById("mobileMenu");
   let lastY = window.scrollY, scrollTick = false;
+
   const onScroll = () => {
     scrollTick = false;
+    // Primero se leen todas las medidas y después se escribe (evita recalcular la página varias veces)
     const y = window.scrollY;
     const max = document.documentElement.scrollHeight - innerHeight;
+    let current = "";
+    sectionsWithId.forEach(s => { if (s.getBoundingClientRect().top < innerHeight * 0.4) current = s.id; });
+    const px = reduceMotion ? [] : parallax.map(el => {
+      const r = el.getBoundingClientRect();
+      if (r.bottom < -300 || r.top > innerHeight + 300) return null;
+      return (r.top + r.height / 2 - innerHeight / 2 - (parseFloat(el.dataset.y) || 0)) * parseFloat(el.dataset.parallax);
+    });
+    let tlP = 0, lit = [];
+    if (timeline) {
+      const r = timeline.getBoundingClientRect();
+      tlP = reduceMotion ? 1 : Math.min(1, Math.max(0, (innerHeight * 0.6 - r.top) / r.height));
+      lit = tlItems.map(li => reduceMotion || li.getBoundingClientRect().top < innerHeight * 0.6);
+    }
+
     if (progress) progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
     if (nav) {
-      nav.classList.toggle("is-scrolled", y > 30);
-      nav.classList.toggle("is-hidden", !reduceMotion && y > lastY && y > 500 && !nav.contains(document.activeElement));
+      nav.classList.toggle("is-scrolled", y > 40);
+      const menuOpen = mobileMenu && mobileMenu.classList.contains("is-open");
+      nav.classList.toggle("is-hidden", !reduceMotion && !menuOpen && y > lastY && y > 400 && !nav.contains(document.activeElement));
     }
     lastY = y;
-    if (!reduceMotion) parallax.forEach(el => {
-      const r = el.getBoundingClientRect();
-      if (r.bottom < -200 || r.top > innerHeight + 200) return;
-      const off = (r.top + r.height / 2 - innerHeight / 2) * parseFloat(el.dataset.parallax);
-      el.style.transform = `translate3d(0, ${off.toFixed(1)}px, 0) scale(1.08)`;
+    if (fab) fab.classList.toggle("is-visible", y > innerHeight * 0.8);
+    navLinks.forEach(a => a.classList.toggle("is-active", a.getAttribute("href") === "#" + current));
+    px.forEach((off, i) => {
+      if (off === null) return;
+      const el = parallax[i];
+      el.dataset.y = off.toFixed(1);
+      el.style.transform = `translate3d(0, ${off.toFixed(1)}px, 0)`;
     });
+    if (timeline) {
+      tlFill.style.transform = `scaleY(${tlP})`;
+      tlItems.forEach((li, i) => li.classList.toggle("is-lit", lit[i]));
+    }
   };
   window.addEventListener("scroll", () => {
     if (!scrollTick) { scrollTick = true; requestAnimationFrame(onScroll); }
   }, { passive: true });
+  window.addEventListener("resize", onScroll);
   onScroll();
+
+  /* ── Menú del móvil (se abre en círculo) ── */
+  const burger = document.getElementById("burger");
+  if (burger && mobileMenu) {
+    const toggleMenu = open => {
+      if (open) {
+        mobileMenu.hidden = false;
+        requestAnimationFrame(() => mobileMenu.classList.add("is-open"));
+      } else {
+        mobileMenu.classList.remove("is-open");
+        setTimeout(() => { if (!mobileMenu.classList.contains("is-open")) mobileMenu.hidden = true; }, reduceMotion ? 0 : 900);
+      }
+      burger.classList.toggle("is-open", open);
+      burger.setAttribute("aria-expanded", open);
+      burger.setAttribute("aria-label", open ? "Cerrar el menú" : "Abrir el menú");
+      document.body.style.overflow = open ? "hidden" : "";
+      if (nav) nav.classList.remove("is-hidden");
+    };
+    burger.addEventListener("click", () => toggleMenu(!mobileMenu.classList.contains("is-open")));
+    mobileMenu.querySelectorAll("a").forEach(a => a.addEventListener("click", () => toggleMenu(false)));
+    document.addEventListener("keydown", e => {
+      if (e.key === "Escape" && mobileMenu.classList.contains("is-open")) { toggleMenu(false); burger.focus(); }
+    });
+  }
+
+  /* ── Pestañas de servicios (accesibles con flechas) ── */
+  document.querySelectorAll("[data-tabs]").forEach(tabsEl => {
+    const tabs = [...tabsEl.querySelectorAll('[role="tab"]')];
+    const select = (tab, focus) => {
+      tabs.forEach(t => {
+        const on = t === tab;
+        t.classList.toggle("is-active", on);
+        t.setAttribute("aria-selected", on);
+        t.tabIndex = on ? 0 : -1;
+        const panel = document.getElementById(t.getAttribute("aria-controls"));
+        panel.classList.toggle("is-active", on);
+      });
+      if (focus) tab.focus();
+    };
+    tabs.forEach((tab, i) => {
+      tab.addEventListener("click", () => select(tab));
+      tab.addEventListener("keydown", e => {
+        let next = null;
+        if (e.key === "ArrowRight" || e.key === "ArrowDown") next = tabs[(i + 1) % tabs.length];
+        else if (e.key === "ArrowLeft" || e.key === "ArrowUp") next = tabs[(i - 1 + tabs.length) % tabs.length];
+        else if (e.key === "Home") next = tabs[0];
+        else if (e.key === "End") next = tabs[tabs.length - 1];
+        if (next) { e.preventDefault(); select(next, true); }
+      });
+    });
+  });
 
   /* ── Contador animado (+15) ── */
   if ("IntersectionObserver" in window && !reduceMotion) {
@@ -62,8 +210,8 @@
       co.unobserve(e.target);
       const el = e.target, end = +el.dataset.count, t0 = performance.now();
       const tick = t => {
-        const k = Math.min((t - t0) / 1400, 1);
-        el.textContent = Math.round(end * (1 - Math.pow(1 - k, 3)));
+        const k = Math.min((t - t0) / 1600, 1);
+        el.textContent = Math.round(end * (1 - Math.pow(1 - k, 4)));
         if (k < 1) requestAnimationFrame(tick);
       };
       requestAnimationFrame(tick);
@@ -71,14 +219,14 @@
     document.querySelectorAll("[data-count]").forEach(el => co.observe(el));
   }
 
-  /* ── Cursor, botones magnéticos e inclinación de tarjetas (solo con ratón) ── */
+  /* ── Cursor y botones magnéticos (solo con ratón) ── */
   if (finePointer && !reduceMotion) {
     const cursor = document.querySelector(".cursor");
     if (cursor) {
       const dot = cursor.querySelector(".cursor__dot"), ring = cursor.querySelector(".cursor__ring");
       let mx = -100, my = -100, rx = mx, ry = my, raf = 0;
       const loop = () => {
-        rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+        rx += (mx - rx) * 0.16; ry += (my - ry) * 0.16;
         ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
         raf = Math.abs(mx - rx) + Math.abs(my - ry) > 0.3 ? requestAnimationFrame(loop) : 0;
       };
@@ -89,24 +237,13 @@
         if (!raf) raf = requestAnimationFrame(loop);
       }, { passive: true });
       document.addEventListener("mouseleave", () => cursor.classList.remove("is-active"));
-      document.addEventListener("mouseover", e => cursor.classList.toggle("is-hover", !!e.target.closest("a, button, summary, input, .tilt")));
+      document.addEventListener("mouseover", e => cursor.classList.toggle("is-hover", !!e.target.closest("a, button, summary, input, .key, .rows li")));
     }
 
     document.querySelectorAll(".magnetic").forEach(el => {
       el.addEventListener("mousemove", e => {
         const r = el.getBoundingClientRect();
-        el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.22}px, ${(e.clientY - r.top - r.height / 2) * 0.3}px)`;
-      });
-      el.addEventListener("mouseleave", () => { el.style.transform = ""; });
-    });
-
-    document.querySelectorAll(".tilt").forEach(el => {
-      el.addEventListener("mousemove", e => {
-        const r = el.getBoundingClientRect();
-        const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
-        el.style.transform = `perspective(900px) rotateY(${(x - 0.5) * 6}deg) rotateX(${(0.5 - y) * 6}deg) translateY(-4px)`;
-        el.style.setProperty("--mx", `${x * 100}%`);
-        el.style.setProperty("--my", `${y * 100}%`);
+        el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.25}px, ${(e.clientY - r.top - r.height / 2) * 0.35}px)`;
       });
       el.addEventListener("mouseleave", () => { el.style.transform = ""; });
     });
@@ -415,7 +552,7 @@
       } else {
         const xL = r1(gutter / 2), xR = r1(W - gutter / 2), xC = r1(W / 2);
         const R = Math.min(30, gutter / 2 - 14);
-        const cy = top(sections[0]) + 40 + R;
+        const cy = top(sections[0]) + 130 + R;
         const pts = tangle(xL, cy, R);
         d = `M${r1(pts[0][0])},${r1(pts[0][1])}` + smooth(pts);
         let x = xL, y = pts[pts.length - 1][1];
