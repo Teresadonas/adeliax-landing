@@ -3,8 +3,20 @@
 
   const reduceMotion = matchMedia("(prefers-reduced-motion: reduce)").matches;
 
+  const finePointer = matchMedia("(hover: hover) and (pointer: fine)").matches;
+
+  /* ── Títulos que aparecen palabra a palabra ── */
+  if (!reduceMotion) {
+    document.querySelectorAll(".section__head h2, .calc h2, .about h2, .final h2").forEach(h => {
+      const words = h.textContent.trim().split(/\s+/);
+      h.setAttribute("aria-label", h.textContent.trim());
+      h.innerHTML = words.map((w, i) => `<span class="w" aria-hidden="true"><span style="--i:${i}">${w}</span></span>`).join(" ");
+      h.classList.add("split");
+    });
+  }
+
   /* ── Aparición suave de los bloques al hacer scroll ── */
-  const items = document.querySelectorAll(".reveal");
+  const items = document.querySelectorAll(".reveal, .draw-on, .split");
   if ("IntersectionObserver" in window && !reduceMotion) {
     const io = new IntersectionObserver(entries => {
       entries.forEach(e => {
@@ -14,6 +26,90 @@
     items.forEach(el => io.observe(el));
   } else {
     items.forEach(el => el.classList.add("is-visible"));
+  }
+
+  /* ── Barra de progreso, cabecera que se esconde y parallax ── */
+  const nav = document.querySelector(".nav");
+  const progress = document.querySelector(".progress");
+  const parallax = [...document.querySelectorAll("[data-parallax]")];
+  let lastY = window.scrollY, scrollTick = false;
+  const onScroll = () => {
+    scrollTick = false;
+    const y = window.scrollY;
+    const max = document.documentElement.scrollHeight - innerHeight;
+    if (progress) progress.style.transform = `scaleX(${max > 0 ? y / max : 0})`;
+    if (nav) {
+      nav.classList.toggle("is-scrolled", y > 30);
+      nav.classList.toggle("is-hidden", !reduceMotion && y > lastY && y > 500 && !nav.contains(document.activeElement));
+    }
+    lastY = y;
+    if (!reduceMotion) parallax.forEach(el => {
+      const r = el.getBoundingClientRect();
+      if (r.bottom < -200 || r.top > innerHeight + 200) return;
+      const off = (r.top + r.height / 2 - innerHeight / 2) * parseFloat(el.dataset.parallax);
+      el.style.transform = `translate3d(0, ${off.toFixed(1)}px, 0) scale(1.08)`;
+    });
+  };
+  window.addEventListener("scroll", () => {
+    if (!scrollTick) { scrollTick = true; requestAnimationFrame(onScroll); }
+  }, { passive: true });
+  onScroll();
+
+  /* ── Contador animado (+15) ── */
+  if ("IntersectionObserver" in window && !reduceMotion) {
+    const co = new IntersectionObserver(entries => entries.forEach(e => {
+      if (!e.isIntersecting) return;
+      co.unobserve(e.target);
+      const el = e.target, end = +el.dataset.count, t0 = performance.now();
+      const tick = t => {
+        const k = Math.min((t - t0) / 1400, 1);
+        el.textContent = Math.round(end * (1 - Math.pow(1 - k, 3)));
+        if (k < 1) requestAnimationFrame(tick);
+      };
+      requestAnimationFrame(tick);
+    }), { threshold: 0.6 });
+    document.querySelectorAll("[data-count]").forEach(el => co.observe(el));
+  }
+
+  /* ── Cursor, botones magnéticos e inclinación de tarjetas (solo con ratón) ── */
+  if (finePointer && !reduceMotion) {
+    const cursor = document.querySelector(".cursor");
+    if (cursor) {
+      const dot = cursor.querySelector(".cursor__dot"), ring = cursor.querySelector(".cursor__ring");
+      let mx = -100, my = -100, rx = mx, ry = my, raf = 0;
+      const loop = () => {
+        rx += (mx - rx) * 0.18; ry += (my - ry) * 0.18;
+        ring.style.transform = `translate(${rx}px, ${ry}px) translate(-50%, -50%)`;
+        raf = Math.abs(mx - rx) + Math.abs(my - ry) > 0.3 ? requestAnimationFrame(loop) : 0;
+      };
+      window.addEventListener("mousemove", e => {
+        mx = e.clientX; my = e.clientY;
+        dot.style.transform = `translate(${mx}px, ${my}px) translate(-50%, -50%)`;
+        cursor.classList.add("is-active");
+        if (!raf) raf = requestAnimationFrame(loop);
+      }, { passive: true });
+      document.addEventListener("mouseleave", () => cursor.classList.remove("is-active"));
+      document.addEventListener("mouseover", e => cursor.classList.toggle("is-hover", !!e.target.closest("a, button, summary, input, .tilt")));
+    }
+
+    document.querySelectorAll(".magnetic").forEach(el => {
+      el.addEventListener("mousemove", e => {
+        const r = el.getBoundingClientRect();
+        el.style.transform = `translate(${(e.clientX - r.left - r.width / 2) * 0.22}px, ${(e.clientY - r.top - r.height / 2) * 0.3}px)`;
+      });
+      el.addEventListener("mouseleave", () => { el.style.transform = ""; });
+    });
+
+    document.querySelectorAll(".tilt").forEach(el => {
+      el.addEventListener("mousemove", e => {
+        const r = el.getBoundingClientRect();
+        const x = (e.clientX - r.left) / r.width, y = (e.clientY - r.top) / r.height;
+        el.style.transform = `perspective(900px) rotateY(${(x - 0.5) * 6}deg) rotateX(${(0.5 - y) * 6}deg) translateY(-4px)`;
+        el.style.setProperty("--mx", `${x * 100}%`);
+        el.style.setProperty("--my", `${y * 100}%`);
+      });
+      el.addEventListener("mouseleave", () => { el.style.transform = ""; });
+    });
   }
 
   /* ── Calculadora de tiempo perdido ──
@@ -129,13 +225,16 @@
       env.gain.exponentialRampToValueAtTime(0.32, t + 0.008);
       env.gain.exponentialRampToValueAtTime(0.1, t + 0.35);
       env.gain.exponentialRampToValueAtTime(0.0001, t + 2.4);
-      env.connect(master);
+      const lp = ctx.createBiquadFilter();
+      lp.type = "lowpass";
+      lp.frequency.value = 2600;
+      env.connect(lp).connect(master);
 
-      const oscs = [["sine", 0.78, 0], ["triangle", 0.22, 3]].map(([type, level, detune]) => {
+      // Fundamental en triángulo + dos armónicos en seno: suena más a piano
+      const oscs = [[1, "triangle", 1], [2, "sine", 0.35], [3, "sine", 0.12]].map(([mult, type, level]) => {
         const o = ctx.createOscillator(), g = ctx.createGain();
         o.type = type;
-        o.frequency.value = f;
-        o.detune.value = detune;
+        o.frequency.value = f * mult;
         g.gain.value = level;
         o.connect(g).connect(env);
         o.start(t);
@@ -145,6 +244,22 @@
 
       key.classList.add("is-down");
       voices.set(id, { key, env, oscs });
+      floatNote(key);
+    };
+
+    // Una nota musical sale volando de la tecla
+    const floatNote = key => {
+      if (reduceMotion) return;
+      const r = key.getBoundingClientRect(), n = document.createElement("span");
+      n.className = "note-float";
+      n.setAttribute("aria-hidden", "true");
+      n.textContent = ["♪", "♫", "♩", "♬"][Math.floor(Math.random() * 4)];
+      n.style.left = `${r.left + r.width / 2}px`;
+      n.style.top = `${r.top - 6}px`;
+      n.style.setProperty("--dx", `${Math.random() * 70 - 35}px`);
+      n.style.setProperty("--r", `${Math.random() * 50 - 25}deg`);
+      document.body.appendChild(n);
+      setTimeout(() => n.remove(), 1450);
     };
 
     const noteOff = id => {
@@ -192,12 +307,13 @@
     piano.addEventListener("keydown", e => {
       const key = e.target.closest(".key");
       if (!key) return;
-      const i = keys.indexOf(key);
+      const visible = keys.filter(k => k.offsetParent !== null); // en móvil se ocultan las teclas extra
+      const i = visible.indexOf(key);
       let next = null;
-      if (e.key === "ArrowRight" || e.key === "ArrowUp") next = keys[Math.min(i + 1, keys.length - 1)];
-      else if (e.key === "ArrowLeft" || e.key === "ArrowDown") next = keys[Math.max(i - 1, 0)];
-      else if (e.key === "Home") next = keys[0];
-      else if (e.key === "End") next = keys[keys.length - 1];
+      if (e.key === "ArrowRight" || e.key === "ArrowUp") next = visible[Math.min(i + 1, visible.length - 1)];
+      else if (e.key === "ArrowLeft" || e.key === "ArrowDown") next = visible[Math.max(i - 1, 0)];
+      else if (e.key === "Home") next = visible[0];
+      else if (e.key === "End") next = visible[visible.length - 1];
       if (next) {
         e.preventDefault();
         key.tabIndex = -1;
@@ -230,7 +346,7 @@
     const typing = el => el && (el.isContentEditable || /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName));
     document.addEventListener("keydown", e => {
       const key = byLetter[e.key.toLowerCase()];
-      if (!key || e.ctrlKey || e.metaKey || e.altKey || typing(document.activeElement)) return;
+      if (!key || key.offsetParent === null || e.ctrlKey || e.metaKey || e.altKey || typing(document.activeElement)) return;
       if (!inView && !piano.contains(document.activeElement)) return;
       e.preventDefault();
       if (!e.repeat) noteOn(key, "k" + e.key.toLowerCase());
