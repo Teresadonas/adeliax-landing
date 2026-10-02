@@ -69,6 +69,9 @@
 </head>
 <body>
 
+<div class="progress" aria-hidden="true"></div>
+<div class="cursor" aria-hidden="true"><span class="cursor__dot"></span><span class="cursor__ring"></span></div>
+
 <header class="nav">
   <div class="container nav__inner">
     <a class="logo" href="#inicio" aria-label="Adeliax, inicio">
@@ -93,21 +96,24 @@
   <!-- 1. PORTADA -->
   <section class="hero">
     <div class="container hero__grid">
-      <div class="hero__text reveal">
+      <div class="hero__text">
         <span class="eyebrow">Automatización · Web · IA</span>
-        <h1>Tu negocio funcionando, <span class="hero__accent">aunque tú no estés</span> pendiente de todo.</h1>
+        <h1 class="hero__title"><span class="line"><span>Tu negocio funcionando,</span></span> <span class="line hero__accent"><span>aunque tú no estés</span></span> <span class="line"><span>pendiente de todo.</span></span></h1>
         <p class="hero__subtitle">Automatizo las tareas que te roban el día, creo webs que cuentan tu historia y te enseño a usar la IA sin tecnicismos. Tú te centras en tu negocio; lo demás funciona solo.</p>
         <div class="cta-row">
-          <a class="btn" data-wa href="#contacto">Escríbeme por WhatsApp</a>
+          <a class="btn magnetic" data-wa href="#contacto">Escríbeme por WhatsApp</a>
           <a class="text-link" data-mail href="#contacto">Envíame un correo</a>
         </div>
         <p class="microcopy">Sin compromiso. Te respondo personalmente en menos de 24 h laborables.</p>
       </div>
-      <div class="hero__visual reveal">
-        <img class="hero__photo" src="img/teresa-hero.jpg" alt="Teresa, fundadora de Adeliax" width="900" height="1197" fetchpriority="high">
+      <div class="hero__visual">
+        <div class="hero__frame"><img class="hero__photo" data-parallax="-0.06" src="img/teresa-hero.jpg" alt="Teresa, fundadora de Adeliax" width="900" height="1197" fetchpriority="high"></div>
       </div>
     </div>
   </section>
+
+  <!-- Cinta en movimiento -->
+  <div class="marquee" aria-hidden="true"><div class="marquee__track"><span>Automatización</span><b>✦</b><span>Webs que cuentan tu historia</span><b>✦</b><span>Formación en IA sin jerga</span><b>✦</b><span>Más tiempo para ti</span><b>✦</b><span>Automatización</span><b>✦</b><span>Webs que cuentan tu historia</span><b>✦</b><span>Formación en IA sin jerga</span><b>✦</b><span>Más tiempo para ti</span><b>✦</b></div></div>
 
   <!-- 2. DOLORES -->
   <section class="section">
@@ -118,12 +124,12 @@
         <p>Si te reconoces en alguna, no es falta de organización. Es que nadie te ha puesto las herramientas adecuadas.</p>
       </div>
       <div class="pains">
-        <article class="pain reveal"><span class="pain__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span><p><strong>Pierdes llamadas</strong> porque estás atendiendo a otro cliente, y ese cliente se va con la competencia.</p></article>
-        <article class="pain reveal"><span class="pain__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><p><strong>Haces presupuestos a mano</strong>, uno a uno, a las diez de la noche.</p></article>
-        <article class="pain reveal"><span class="pain__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg></span><p><strong>Repites lo mismo cada día</strong>: confirmar citas, responder las mismas preguntas, mandar los mismos correos.</p></article>
-        <article class="pain reveal"><span class="pain__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></span><p><strong>Tu web no aparece en Google</strong>, o está anticuada y no refleja lo que vales.</p></article>
-        <article class="pain reveal"><span class="pain__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9z"/><path d="M18.5 15l.8 1.7 1.7.8-1.7.8-.8 1.7-.8-1.7-1.7-.8 1.7-.8z"/></svg></span><p><strong>Oyes hablar de la IA a todas horas</strong>, pero no sabes por dónde empezar ni si es para ti.</p></article>
-        <article class="pain reveal"><span class="pain__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12M6 21h12"/><path d="M7 3c0 4.5 5 6 5 9s-5 4.5-5 9M17 3c0 4.5-5 6-5 9s5 4.5 5 9"/></svg></span><p><strong>Si tú paras, el negocio para.</strong> No hay vacaciones ni bajas que valgan.</p></article>
+        <article class="tilt pain reveal"><span class="pain__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span><p><strong>Pierdes llamadas</strong> porque estás atendiendo a otro cliente, y ese cliente se va con la competencia.</p></article>
+        <article class="tilt pain reveal"><span class="pain__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><p><strong>Haces presupuestos a mano</strong>, uno a uno, a las diez de la noche.</p></article>
+        <article class="tilt pain reveal"><span class="pain__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg></span><p><strong>Repites lo mismo cada día</strong>: confirmar citas, responder las mismas preguntas, mandar los mismos correos.</p></article>
+        <article class="tilt pain reveal"><span class="pain__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></span><p><strong>Tu web no aparece en Google</strong>, o está anticuada y no refleja lo que vales.</p></article>
+        <article class="tilt pain reveal"><span class="pain__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9z"/><path d="M18.5 15l.8 1.7 1.7.8-1.7.8-.8 1.7-.8-1.7-1.7-.8 1.7-.8z"/></svg></span><p><strong>Oyes hablar de la IA a todas horas</strong>, pero no sabes por dónde empezar ni si es para ti.</p></article>
+        <article class="tilt pain reveal"><span class="pain__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12M6 21h12"/><path d="M7 3c0 4.5 5 6 5 9s-5 4.5-5 9M17 3c0 4.5-5 6-5 9s5 4.5 5 9"/></svg></span><p><strong>Si tú paras, el negocio para.</strong> No hay vacaciones ni bajas que valgan.</p></article>
       </div>
       <p class="section__closing reveal">No tiene por qué ser así.</p>
     </div>
@@ -163,7 +169,7 @@
 
         <p class="calc__closing">Es solo una cuenta aproximada, no una promesa de ahorro. Si quieres, me cuentas qué tareas son y vemos qué se puede hacer.</p>
         <div class="center">
-          <a class="btn" data-wa data-calc-cta href="#contacto">Cuéntame tus tareas</a>
+          <a class="btn magnetic" data-wa data-calc-cta href="#contacto">Cuéntame tus tareas</a>
         </div>
       </div>
     </div>
@@ -179,7 +185,7 @@
       </div>
       <div class="services">
 
-        <article class="service reveal">
+        <article class="tilt service reveal">
           <div class="service__icon">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg>
           </div>
@@ -197,7 +203,7 @@
           <a class="link-arrow" data-wa data-wa-text="Hola Teresa, me interesa automatizar tareas de mi negocio." href="#contacto">Quiero recuperar mi tiempo →</a>
         </article>
 
-        <article class="service service--featured reveal">
+        <article class="tilt service service--featured reveal">
           <div class="service__icon">
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
           </div>
@@ -216,7 +222,7 @@
           <a class="link-arrow" data-wa data-wa-text="Hola Teresa, me interesa una web para mi negocio." href="#contacto">Solicitar información →</a>
         </article>
 
-        <article class="service reveal">
+        <article class="tilt service reveal">
           <div class="service__icon">
             <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 18h6M10 21h4"/><path d="M12 3a6 6 0 0 0-4 10.5c.7.7 1 1.5 1 2.5h6c0-1 .3-1.8 1-2.5A6 6 0 0 0 12 3z"/></svg>
           </div>
@@ -244,7 +250,7 @@
         <span class="eyebrow">Cómo trabajo</span>
         <h2>Sencillo, claro y a tu medida.</h2>
       </div>
-      <ol class="steps">
+      <ol class="steps draw-on">
         <li class="step reveal"><span class="step__num">1</span><h3>Hablamos</h3><p>Me cuentas tu negocio y qué te quita tiempo. Sin compromiso.</p></li>
         <li class="step reveal"><span class="step__num">2</span><h3>Te propongo un plan</h3><p>Por escrito, con precio cerrado y plazos claros.</p></li>
         <li class="step reveal"><span class="step__num">3</span><h3>Lo pongo en marcha</h3><p>Tú sigues con tu trabajo; yo me ocupo de todo.</p></li>
@@ -258,8 +264,8 @@
   <section id="sobre" class="section">
     <div class="container about">
       <div class="about__visual reveal">
-        <img class="about__photo" src="img/teresa-sentada.jpg" alt="Retrato de Teresa" width="1005" height="1351" loading="lazy">
-        <div class="badge"><strong>+25</strong><span>años gestionando proyectos exigentes</span></div>
+        <div class="reveal-img"><img class="about__photo" src="img/teresa-sentada.jpg" alt="Retrato de Teresa" width="1005" height="1351" loading="lazy"></div>
+        <div class="badge"><strong><span class="sr-only">Más de </span><span aria-hidden="true">+</span><span data-count="15">15</span></strong><span>años gestionando proyectos exigentes</span></div>
       </div>
       <div class="about__text reveal">
         <span class="eyebrow">Sobre mí</span>
@@ -274,8 +280,9 @@
 
         <div class="piano-wrap">
           <p class="piano-wrap__label" id="piano-label">Prueba las teclas</p>
-          <p class="sr-only" id="piano-help">Pulsa Intro o Espacio para tocar la nota enfocada y usa las flechas para cambiar de tecla. Con el teclado del ordenador: A, S, D, F, G, H, J y K para las teclas blancas; W, E, T, Y y U para las negras.</p>
+          <p class="sr-only" id="piano-help">Pulsa Intro o Espacio para tocar la nota enfocada y usa las flechas para cambiar de tecla. Con el teclado del ordenador: A, S, D, F, G, H, J, K, L y Ñ para las teclas blancas; W, E, T, Y, U, O y P para las negras.</p>
           <div class="piano" role="group" aria-label="Teclado de piano" aria-describedby="piano-help" data-piano>
+            <div class="piano__keys">
             <button type="button" class="key key--white" data-freq="261.63" data-key="a" aria-label="Do"><span class="key__hint" aria-hidden="true">A</span></button>
             <button type="button" class="key key--black" data-freq="277.18" data-key="w" aria-label="Do sostenido" style="--pos:1"><span class="key__hint" aria-hidden="true">W</span></button>
             <button type="button" class="key key--white" data-freq="293.66" data-key="s" aria-label="Re"><span class="key__hint" aria-hidden="true">S</span></button>
@@ -289,19 +296,24 @@
             <button type="button" class="key key--black" data-freq="466.16" data-key="u" aria-label="La sostenido" style="--pos:6"><span class="key__hint" aria-hidden="true">U</span></button>
             <button type="button" class="key key--white" data-freq="493.88" data-key="j" aria-label="Si"><span class="key__hint" aria-hidden="true">J</span></button>
             <button type="button" class="key key--white" data-freq="523.25" data-key="k" aria-label="Do agudo"><span class="key__hint" aria-hidden="true">K</span></button>
+            <button type="button" class="key key--black key--extra" data-freq="554.37" data-key="o" aria-label="Do sostenido agudo" style="--pos:8"><span class="key__hint" aria-hidden="true">O</span></button>
+            <button type="button" class="key key--white key--extra" data-freq="587.33" data-key="l" aria-label="Re agudo"><span class="key__hint" aria-hidden="true">L</span></button>
+            <button type="button" class="key key--black key--extra" data-freq="622.25" data-key="p" aria-label="Re sostenido agudo" style="--pos:9"><span class="key__hint" aria-hidden="true">P</span></button>
+            <button type="button" class="key key--white key--extra" data-freq="659.25" data-key="ñ" aria-label="Mi agudo"><span class="key__hint" aria-hidden="true">Ñ</span></button>
+            </div>
           </div>
         </div>
 
         <p class="about__invite">¿Te apetece que hablemos? Tú decides.</p>
         <div class="cta-row">
-          <a class="btn" data-wa href="#contacto">Escríbeme por WhatsApp</a>
-          <a class="btn btn--ghost" data-calendly href="#contacto" target="_blank" rel="noopener">Agendar en Calendly</a>
+          <a class="btn magnetic" data-wa href="#contacto">Escríbeme por WhatsApp</a>
+          <a class="btn magnetic btn--ghost" data-calendly href="#contacto" target="_blank" rel="noopener">Agendar en Calendly</a>
         </div>
         <p class="signature">Teresa García-Donas Jiménez</p>
         <p class="about__linkedin"><a href="https://www.linkedin.com/in/teresa-garcía-donas-jiménez" target="_blank" rel="noopener">Ver mi perfil en LinkedIn →</a></p>
       </div>
       <ul class="trust reveal">
-        <li><strong>+25 años</strong> gestionando proyectos exigentes y de innovación.</li>
+        <li><strong>+ de 15 años</strong> gestionando proyectos exigentes y de innovación.</li>
         <li><strong>Método:</strong> analizo antes de proponer y mido lo que implanto.</li>
         <li><strong>Trato directo:</strong> hablas siempre conmigo, no con un call center.</li>
         <li><strong>Rigor y confidencialidad:</strong> estoy acostumbrada a trabajar con información sensible.</li>
@@ -337,8 +349,8 @@
       <h2>Tu tiempo vale mucho. Empecemos a recuperarlo.</h2>
       <p>Cuéntame qué te quita horas o qué te gustaría mejorar. Te respondo personalmente y te digo cómo puedo ayudarte.</p>
       <div class="cta-row cta-row--center">
-        <a class="btn btn--large" data-wa href="#contacto">Escríbeme por WhatsApp</a>
-        <a class="btn btn--outline-light btn--large" data-mail href="#contacto">Envíame un correo</a>
+        <a class="btn magnetic btn--large" data-wa href="#contacto">Escríbeme por WhatsApp</a>
+        <a class="btn magnetic btn--outline-light btn--large" data-mail href="#contacto">Envíame un correo</a>
       </div>
       <p class="final__alt">¿Prefieres una llamada? <a data-calendly href="#contacto" target="_blank" rel="noopener">Agenda en Calendly →</a></p>
     </div>
