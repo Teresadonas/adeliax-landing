@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Adeliax — Automatización, web e IA para tu negocio</title>
-<meta name="description" content="Automatizo las tareas que te roban el día, creo webs que aparecen en Google y te enseño a usar la IA sin tecnicismos. Adeliax, con Teresa.">
+<meta name="description" content="Automatizo las tareas que te roban el día, creo webs que cuentan tu historia y te enseño a usar la IA sin tecnicismos. Adeliax, con Teresa.">
 <link rel="canonical" href="https://www.adeliax.com/">
 
 <!-- Open Graph (cómo se ve el enlace al compartirlo en WhatsApp, LinkedIn, Facebook…) -->
@@ -13,7 +13,7 @@
 <meta property="og:site_name" content="Adeliax">
 <meta property="og:url" content="https://www.adeliax.com/">
 <meta property="og:title" content="Adeliax — Automatización, web e IA para tu negocio">
-<meta property="og:description" content="Automatizo las tareas que te roban el día, creo webs que aparecen en Google y te enseño a usar la IA sin tecnicismos.">
+<meta property="og:description" content="Automatizo las tareas que te roban el día, creo webs que cuentan tu historia y te enseño a usar la IA sin tecnicismos.">
 <meta property="og:image" content="https://www.adeliax.com/img/teresa-hero.jpg">
 <meta property="og:image:width" content="900">
 <meta property="og:image:height" content="1197">
@@ -22,7 +22,7 @@
 <!-- Twitter / X Card -->
 <meta name="twitter:card" content="summary_large_image">
 <meta name="twitter:title" content="Adeliax — Automatización, web e IA para tu negocio">
-<meta name="twitter:description" content="Automatizo las tareas que te roban el día, creo webs que aparecen en Google y te enseño a usar la IA sin tecnicismos.">
+<meta name="twitter:description" content="Automatizo las tareas que te roban el día, creo webs que cuentan tu historia y te enseño a usar la IA sin tecnicismos.">
 <meta name="twitter:image" content="https://www.adeliax.com/img/teresa-hero.jpg">
 
 <!-- Datos estructurados para Google -->
@@ -61,9 +61,8 @@
   ]
 }
 </script>
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400&family=Plus+Jakarta+Sans:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="preload" href="fonts/fraunces-latin.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="fonts/plus-jakarta-sans-latin.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="icon" type="image/png" href="img/favicon.png">
 <link rel="stylesheet" href="style.css">
 <script>document.documentElement.classList.add("js");</script>
@@ -76,7 +75,7 @@
       <span class="logo-mark"><img src="img/logo-icono.png" alt="Adeliax" width="54" height="40"><span class="node n1"></span><span class="node n2"></span><span class="node n3"></span><span class="node n4"></span><span class="node n5"></span><span class="node n6"></span></span>
       <span class="logo__text">adelia<em>x</em></span>
     </a>
-    <nav class="nav__links">
+    <nav class="nav__links" aria-label="Principal">
       <a href="#servicios">Servicios</a>
       <a href="#como-trabajo">Cómo trabajo</a>
       <a href="#sobre">Sobre mí</a>
@@ -88,37 +87,27 @@
 
 <main id="inicio">
 
-  <!-- 1. HERO -->
+  <!-- Hilo que se dibuja con el scroll (decorativo) -->
+  <svg class="thread" aria-hidden="true" focusable="false"><path /></svg>
+
+  <!-- 1. PORTADA -->
   <section class="hero">
     <div class="container hero__grid">
       <div class="hero__text reveal">
         <span class="eyebrow">Automatización · Web · IA</span>
-        <h1>Tu negocio funcionando, <span class="shine">aunque tú no estés</span> pendiente de todo.</h1>
-        <p class="hero__subtitle">Automatizo las tareas que te roban el día, creo webs que aparecen en Google y te enseño a usar la IA sin tecnicismos. Tú te centras en tu negocio; lo demás funciona solo.</p>
+        <h1>Tu negocio funcionando, <span class="hero__accent">aunque tú no estés</span> pendiente de todo.</h1>
+        <p class="hero__subtitle">Automatizo las tareas que te roban el día, creo webs que cuentan tu historia y te enseño a usar la IA sin tecnicismos. Tú te centras en tu negocio; lo demás funciona solo.</p>
         <div class="cta-row">
-          <a class="btn btn--wa" data-wa href="#contacto">Escríbeme por WhatsApp</a>
-          <a class="btn btn--ghost" data-mail href="#contacto">Envíame un correo</a>
+          <a class="btn" data-wa href="#contacto">Escríbeme por WhatsApp</a>
+          <a class="text-link" data-mail href="#contacto">Envíame un correo</a>
         </div>
         <p class="microcopy">Sin compromiso. Te respondo personalmente en menos de 24 h laborables.</p>
       </div>
       <div class="hero__visual reveal">
-        <div class="blob blob--1" aria-hidden="true"></div>
-        <div class="blob blob--2" aria-hidden="true"></div>
-        <img class="hero__photo" src="img/teresa-hero.jpg" alt="Teresa, fundadora de Adeliax" width="900" height="1197">
-        <!-- Notificaciones flotantes: muestran la automatización "funcionando" -->
-        <div class="notif notif--1" aria-hidden="true"><span class="notif__icon">📞</span><div><strong>Llamada atendida</strong><small>Automáticamente · hace 2 min</small></div></div>
-        <div class="notif notif--2" aria-hidden="true"><span class="notif__icon notif__icon--ok">✓</span><div><strong>Presupuesto enviado</strong><small>Sin que tú hagas nada · 21:47</small></div></div>
-        <div class="notif notif--3" aria-hidden="true"><span class="notif__icon">⭐</span><div><strong>Nuevo contacto desde Google</strong><small>Tu web trabajando por ti</small></div></div>
+        <img class="hero__photo" src="img/teresa-hero.jpg" alt="Teresa, fundadora de Adeliax" width="900" height="1197" fetchpriority="high">
       </div>
     </div>
   </section>
-
-  <!-- Cinta en movimiento -->
-  <div class="marquee" aria-hidden="true">
-    <div class="marquee__track">
-      <span>Atención de llamadas</span><span>Presupuestos automáticos</span><span>Recordatorios de citas</span><span>Webs que aparecen en Google</span><span>Formación en IA sin jerga</span><span>Más tiempo para ti</span><span>Atención de llamadas</span><span>Presupuestos automáticos</span><span>Recordatorios de citas</span><span>Webs que aparecen en Google</span><span>Formación en IA sin jerga</span><span>Más tiempo para ti</span>
-    </div>
-  </div>
 
   <!-- 2. DOLORES -->
   <section class="section">
@@ -129,47 +118,53 @@
         <p>Si te reconoces en alguna, no es falta de organización. Es que nadie te ha puesto las herramientas adecuadas.</p>
       </div>
       <div class="pains">
-        <article class="pain reveal"><span class="pain__icon">📞</span><p><strong>Pierdes llamadas</strong> porque estás atendiendo a otro cliente, y ese cliente se va con la competencia.</p></article>
-        <article class="pain reveal"><span class="pain__icon">📄</span><p><strong>Haces presupuestos a mano</strong>, uno a uno, a las diez de la noche.</p></article>
-        <article class="pain reveal"><span class="pain__icon">🔁</span><p><strong>Repites lo mismo cada día</strong>: confirmar citas, responder las mismas preguntas, mandar los mismos correos.</p></article>
-        <article class="pain reveal"><span class="pain__icon">🔍</span><p><strong>Tu web no aparece en Google</strong>, o está anticuada y no refleja lo que vales.</p></article>
-        <article class="pain reveal"><span class="pain__icon">🤖</span><p><strong>Oyes hablar de la IA a todas horas</strong>, pero no sabes por dónde empezar ni si es para ti.</p></article>
-        <article class="pain reveal"><span class="pain__icon">⏳</span><p><strong>Si tú paras, el negocio para.</strong> No hay vacaciones ni bajas que valgan.</p></article>
+        <article class="pain reveal"><span class="pain__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M5 4h3l2 5-2.5 1.5a11 11 0 0 0 6 6L15 14l5 2v3a2 2 0 0 1-2 2A16 16 0 0 1 3 6a2 2 0 0 1 2-2z"/></svg></span><p><strong>Pierdes llamadas</strong> porque estás atendiendo a otro cliente, y ese cliente se va con la competencia.</p></article>
+        <article class="pain reveal"><span class="pain__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M14 3H7a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h10a2 2 0 0 0 2-2V8z"/><path d="M14 3v5h5M9 13h6M9 17h4"/></svg></span><p><strong>Haces presupuestos a mano</strong>, uno a uno, a las diez de la noche.</p></article>
+        <article class="pain reveal"><span class="pain__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M17 2l4 4-4 4"/><path d="M3 11V9a3 3 0 0 1 3-3h15"/><path d="M7 22l-4-4 4-4"/><path d="M21 13v2a3 3 0 0 1-3 3H3"/></svg></span><p><strong>Repites lo mismo cada día</strong>: confirmar citas, responder las mismas preguntas, mandar los mismos correos.</p></article>
+        <article class="pain reveal"><span class="pain__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg></span><p><strong>Tu web no aparece en Google</strong>, o está anticuada y no refleja lo que vales.</p></article>
+        <article class="pain reveal"><span class="pain__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M11 3l1.9 5.1L18 10l-5.1 1.9L11 17l-1.9-5.1L4 10l5.1-1.9z"/><path d="M18.5 15l.8 1.7 1.7.8-1.7.8-.8 1.7-.8-1.7-1.7-.8 1.7-.8z"/></svg></span><p><strong>Oyes hablar de la IA a todas horas</strong>, pero no sabes por dónde empezar ni si es para ti.</p></article>
+        <article class="pain reveal"><span class="pain__icon"><svg class="icon" viewBox="0 0 24 24" aria-hidden="true"><path d="M6 3h12M6 21h12"/><path d="M7 3c0 4.5 5 6 5 9s-5 4.5-5 9M17 3c0 4.5-5 6-5 9s5 4.5 5 9"/></svg></span><p><strong>Si tú paras, el negocio para.</strong> No hay vacaciones ni bajas que valgan.</p></article>
       </div>
       <p class="section__closing reveal">No tiene por qué ser así.</p>
     </div>
   </section>
 
-  <!-- 3. EL CAMBIO -->
-  <section class="section section--tint">
+  <!-- 3. CALCULADORA DE TIEMPO PERDIDO (todo se calcula en el navegador: no se envía ni se guarda nada) -->
+  <section id="calculadora" class="section section--tint">
     <div class="container">
-      <div class="section__head reveal">
-        <span class="eyebrow">La solución</span>
-        <h2>Imagina tu semana con Adeliax.</h2>
-        <p>Las llamadas se atienden aunque no puedas coger el teléfono. Los presupuestos salen solos. Tus clientes te encuentran en Google y lo que ven les convence. Y la IA deja de ser un misterio para convertirse en una herramienta más de tu día a día.</p>
-      </div>
-      <div class="compare reveal">
-        <div class="compare__col compare__col--before">
-          <h3>Antes</h3>
-          <ul>
-            <li>Tú haces todo</li>
-            <li>Clientes que se pierden</li>
-            <li>Web invisible</li>
-            <li>IA = incertidumbre</li>
-          </ul>
+      <div class="calc reveal" data-calc>
+        <h2>¿Cuánto tiempo se te va en lo repetitivo?</h2>
+
+        <div class="calc__field">
+          <div class="calc__label">
+            <label for="calc-tasks">Tareas repetitivas por semana</label>
+            <output id="calc-tasks-out" for="calc-tasks" aria-hidden="true">5</output>
+          </div>
+          <input class="range" type="range" id="calc-tasks" min="1" max="30" step="1" value="5">
         </div>
-        <div class="compare__col compare__col--after">
-          <h3>Con Adeliax</h3>
-          <ul>
-            <li>Los sistemas hacen lo repetitivo</li>
-            <li>Cada contacto recibe respuesta</li>
-            <li>Web que aparece y convence</li>
-            <li>IA = ventaja práctica</li>
-          </ul>
+
+        <div class="calc__field">
+          <div class="calc__label">
+            <label for="calc-minutes">Minutos por tarea</label>
+            <output id="calc-minutes-out" for="calc-minutes" aria-hidden="true">20</output>
+          </div>
+          <input class="range" type="range" id="calc-minutes" min="5" max="120" step="5" value="20">
         </div>
-      </div>
-      <div class="center reveal">
-        <a class="btn btn--wa" data-wa href="#contacto">Cuéntame tu caso por WhatsApp</a>
+
+        <div aria-live="polite" aria-atomic="true">
+          <div class="calc__result" aria-hidden="true">
+            <p class="calc__stat"><span class="calc__num" data-out="week">1,7</span><span class="calc__unit">horas por semana</span></p>
+            <p class="calc__stat"><span class="calc__num" data-out="year">77</span><span class="calc__unit">horas al año</span></p>
+            <p class="calc__stat"><span class="calc__num" data-out="days">9,6</span><span class="calc__unit">jornadas de 8 horas</span></p>
+          </div>
+          <p class="sr-only" data-out="summary">Unas 1,7 horas por semana, 77 horas al año, el equivalente a 9,6 jornadas de 8 horas.</p>
+        </div>
+        <p class="calc__note">Cálculo orientativo sobre 46 semanas al año</p>
+
+        <p class="calc__closing">Es solo una cuenta aproximada, no una promesa de ahorro. Si quieres, me cuentas qué tareas son y vemos qué se puede hacer.</p>
+        <div class="center">
+          <a class="btn" data-wa data-calc-cta href="#contacto">Cuéntame tus tareas</a>
+        </div>
       </div>
     </div>
   </section>
@@ -207,17 +202,18 @@
             <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4"/></svg>
           </div>
           <span class="service__num">02</span>
-          <h3>Haz que te encuentren</h3>
-          <p class="service__lead">Creo tu web para que aparezcas en Google y te diferencies. Tú no programas ni mantienes nada.</p>
+          <h3>Una web que cuenta tu historia</h3>
+          <p class="service__lead">Tu negocio tiene una historia: cómo empezaste, qué te mueve, por qué haces las cosas como las haces. Es lo que te diferencia de los demás y lo que hace que un cliente se quede contigo, y casi nunca aparece en una web.</p>
+          <p class="service__lead">Diseño landings que cuentan esa historia y que, además, son fáciles de encontrar y de usar. Tú no tienes que programar ni mantener nada.</p>
           <ul class="checks">
-            <li>Diseño a medida, bonito y coherente con tu marca.</li>
-            <li>Preparada para Google desde el primer día (SEO básico y local).</li>
-            <li>Pensada para el móvil, que es desde donde te buscan.</li>
-            <li>Con botones de contacto claros para que el visitante te escriba.</li>
+            <li>Una historia a medida, con tus palabras y tu forma de ser, sin frases de plantilla.</li>
+            <li>Diseño propio, coherente con tu marca y pensado para el móvil, que es desde donde te buscan.</li>
+            <li>Preparada para buscadores desde el primer día (SEO básico y local).</li>
+            <li>Botones de contacto claros, para que quien te visite pueda escribirte en un momento.</li>
             <li>Mantenimiento incluido o a demanda: de lo técnico me ocupo yo.</li>
           </ul>
-          <p class="service__result"><strong>Qué puedes esperar:</strong> una web de la que presumir, más visibilidad y más contactos de calidad.</p>
-          <a class="link-arrow" data-wa data-wa-text="Hola Teresa, me interesa una web para mi negocio." href="#contacto">Quiero que me encuentren →</a>
+          <p class="service__result"><strong>Qué puedes esperar:</strong> una web con la que te identifiques, que se recuerde y que facilite que te escriban personas que ya saben quién eres.</p>
+          <a class="link-arrow" data-wa data-wa-text="Hola Teresa, me interesa una web para mi negocio." href="#contacto">Solicitar información →</a>
         </article>
 
         <article class="service reveal">
@@ -258,54 +254,63 @@
     </div>
   </section>
 
-  <!-- 6. SOBRE TERESA -->
+  <!-- 6. SOBRE MÍ -->
   <section id="sobre" class="section">
     <div class="container about">
       <div class="about__visual reveal">
         <img class="about__photo" src="img/teresa-sentada.jpg" alt="Retrato de Teresa" width="1005" height="1351" loading="lazy">
-        <div class="badge"><strong data-count="25">+25</strong><span>años gestionando proyectos exigentes</span></div>
+        <div class="badge"><strong>+25</strong><span>años gestionando proyectos exigentes</span></div>
       </div>
       <div class="about__text reveal">
         <span class="eyebrow">Sobre mí</span>
         <h2>Hola, soy Teresa.</h2>
-        <p>Llevo más de 25 años gestionando proyectos donde el rigor, los plazos y la precisión no son negociables: investigación clínica y proyectos de I+D+i. Ahí aprendí a ordenar procesos complejos, a detectar dónde se pierde el tiempo y a convertir la innovación en algo útil y aplicable.</p>
-        <p>Hoy pongo esa experiencia al servicio de negocios como el tuyo. Me da igual si tienes una clínica, una tienda, un despacho o un taller: los problemas se parecen mucho (demasiadas tareas manuales, poco tiempo y la sensación de que la tecnología va más rápido que tú).</p>
-        <p>Trabajo desde Madrid con negocios de toda España, en persona o en remoto.</p>
-        <p>Mi forma de trabajar es cercana y transparente. Te hablo claro, sin tecnicismos, y no te propongo nada que no vayas a usar.</p>
-        <ul class="trust">
-          <li><strong>+25 años</strong> gestionando proyectos exigentes y de innovación.</li>
-          <li><strong>Método:</strong> analizo antes de proponer y mido lo que implanto.</li>
-          <li><strong>Trato directo:</strong> hablas siempre conmigo, no con un call center.</li>
-          <li><strong>Rigor y confidencialidad:</strong> estoy acostumbrada a trabajar con información sensible.</li>
-        </ul>
+        <p>Vengo de una familia de sanitarios: médicos, farmacéuticos y químicos, como yo.</p>
+        <p>Mi abuelo fue médico rural en un pueblo de Sevilla. Le gustaba tanto su trabajo que se pasó casi toda la vida atendiendo a sus pacientes, de día, de noche o en festivo. Decía que él nunca había trabajado, porque lo que hacía era lo que más le gustaba en el mundo.</p>
+        <p>De él aprendí que dedicarte a lo que te apasiona es de lo mejor que te puede pasar.</p>
+        <p>Yo he pasado muchos años en investigación y dirigiendo proyectos. Allí me di cuenta de cuánto tiempo se nos va en tareas repetitivas que nadie disfruta, y de lo mucho que importa cuidar a las personas con las que trabajas.</p>
+        <p>Por eso creé Adeliax: para ayudarte a quitarte de encima esas tareas y que tengas más tiempo para lo que de verdad te importa.</p>
+        <p>Y cuando me toca ser creativa, hago landings que cuentan tu historia, no solo lo que vendes. Porque todos tenemos una historia que nos hace distintos y nos acerca a la gente que nos elige.</p>
+        <p>Fuera del trabajo, lo mío es la música. Toco el saxofón y el piano, y por si te apetece, aquí tienes un teclado para que toques un ratito.</p>
+
+        <div class="piano-wrap">
+          <p class="piano-wrap__label" id="piano-label">Prueba las teclas</p>
+          <p class="sr-only" id="piano-help">Pulsa Intro o Espacio para tocar la nota enfocada y usa las flechas para cambiar de tecla. Con el teclado del ordenador: A, S, D, F, G, H, J y K para las teclas blancas; W, E, T, Y y U para las negras.</p>
+          <div class="piano" role="group" aria-label="Teclado de piano" aria-describedby="piano-help" data-piano>
+            <button type="button" class="key key--white" data-freq="261.63" data-key="a" aria-label="Do"><span class="key__hint" aria-hidden="true">A</span></button>
+            <button type="button" class="key key--black" data-freq="277.18" data-key="w" aria-label="Do sostenido" style="--pos:1"><span class="key__hint" aria-hidden="true">W</span></button>
+            <button type="button" class="key key--white" data-freq="293.66" data-key="s" aria-label="Re"><span class="key__hint" aria-hidden="true">S</span></button>
+            <button type="button" class="key key--black" data-freq="311.13" data-key="e" aria-label="Re sostenido" style="--pos:2"><span class="key__hint" aria-hidden="true">E</span></button>
+            <button type="button" class="key key--white" data-freq="329.63" data-key="d" aria-label="Mi"><span class="key__hint" aria-hidden="true">D</span></button>
+            <button type="button" class="key key--white" data-freq="349.23" data-key="f" aria-label="Fa"><span class="key__hint" aria-hidden="true">F</span></button>
+            <button type="button" class="key key--black" data-freq="369.99" data-key="t" aria-label="Fa sostenido" style="--pos:4"><span class="key__hint" aria-hidden="true">T</span></button>
+            <button type="button" class="key key--white" data-freq="392.00" data-key="g" aria-label="Sol"><span class="key__hint" aria-hidden="true">G</span></button>
+            <button type="button" class="key key--black" data-freq="415.30" data-key="y" aria-label="Sol sostenido" style="--pos:5"><span class="key__hint" aria-hidden="true">Y</span></button>
+            <button type="button" class="key key--white" data-freq="440.00" data-key="h" aria-label="La"><span class="key__hint" aria-hidden="true">H</span></button>
+            <button type="button" class="key key--black" data-freq="466.16" data-key="u" aria-label="La sostenido" style="--pos:6"><span class="key__hint" aria-hidden="true">U</span></button>
+            <button type="button" class="key key--white" data-freq="493.88" data-key="j" aria-label="Si"><span class="key__hint" aria-hidden="true">J</span></button>
+            <button type="button" class="key key--white" data-freq="523.25" data-key="k" aria-label="Do agudo"><span class="key__hint" aria-hidden="true">K</span></button>
+          </div>
+        </div>
+
+        <p class="about__invite">¿Te apetece que hablemos? Tú decides.</p>
+        <div class="cta-row">
+          <a class="btn" data-wa href="#contacto">Escríbeme por WhatsApp</a>
+          <a class="btn btn--ghost" data-calendly href="#contacto" target="_blank" rel="noopener">Agendar en Calendly</a>
+        </div>
         <p class="signature">Teresa García-Donas Jiménez</p>
         <p class="about__linkedin"><a href="https://www.linkedin.com/in/teresa-garcía-donas-jiménez" target="_blank" rel="noopener">Ver mi perfil en LinkedIn →</a></p>
-        <div class="cta-row">
-          <a class="btn btn--wa" data-wa href="#contacto">Escríbeme por WhatsApp</a>
-          <a class="btn btn--ghost" data-mail href="#contacto">Envíame un correo</a>
-        </div>
       </div>
+      <ul class="trust reveal">
+        <li><strong>+25 años</strong> gestionando proyectos exigentes y de innovación.</li>
+        <li><strong>Método:</strong> analizo antes de proponer y mido lo que implanto.</li>
+        <li><strong>Trato directo:</strong> hablas siempre conmigo, no con un call center.</li>
+        <li><strong>Rigor y confidencialidad:</strong> estoy acostumbrada a trabajar con información sensible.</li>
+      </ul>
     </div>
   </section>
 
-  <!-- 7. CALENDLY (opcional) -->
-  <section class="section section--tint">
-    <div class="container">
-      <div class="calendly reveal">
-        <div>
-          <h2>¿Prefieres que lo hablemos con calma?</h2>
-          <p>Reserva una llamada gratuita de 20–30 minutos. Me cuentas tu situación y te digo, con total sinceridad, si puedo ayudarte y cómo.</p>
-        </div>
-        <div class="calendly__cta">
-          <a class="btn" data-calendly href="#contacto" target="_blank" rel="noopener">📅 Agendar en Calendly</a>
-          <p class="microcopy">Elige el día y la hora que mejor te vengan. Sin compromiso.</p>
-        </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- 8. FAQ -->
-  <section id="faq" class="section">
+  <!-- 7. PREGUNTAS FRECUENTES -->
+  <section id="faq" class="section section--tint">
     <div class="container container--narrow">
       <div class="section__head reveal">
         <span class="eyebrow">Preguntas frecuentes</span>
@@ -325,22 +330,22 @@
     </div>
   </section>
 
-  <!-- 9. CTA FINAL -->
+  <!-- 8. FRANJA FINAL DE CONTACTO -->
   <section id="contacto" class="final">
     <div class="container final__inner reveal">
       <span class="logo-mark logo-mark--big"><img src="img/logo-icono-blanco.png" alt="Adeliax" width="160" height="120" loading="lazy"><span class="node n1"></span><span class="node n2"></span><span class="node n3"></span><span class="node n4"></span><span class="node n5"></span><span class="node n6"></span></span>
       <h2>Tu tiempo vale mucho. Empecemos a recuperarlo.</h2>
       <p>Cuéntame qué te quita horas o qué te gustaría mejorar. Te respondo personalmente y te digo cómo puedo ayudarte.</p>
       <div class="cta-row cta-row--center">
-        <a class="btn btn--wa btn--large" data-wa href="#contacto">Escríbeme por WhatsApp</a>
-        <a class="btn btn--light btn--large" data-mail href="#contacto">Envíame un correo</a>
+        <a class="btn btn--large" data-wa href="#contacto">Escríbeme por WhatsApp</a>
+        <a class="btn btn--outline-light btn--large" data-mail href="#contacto">Envíame un correo</a>
       </div>
       <p class="final__alt">¿Prefieres una llamada? <a data-calendly href="#contacto" target="_blank" rel="noopener">Agenda en Calendly →</a></p>
     </div>
   </section>
 </main>
 
-<!-- 10. FOOTER -->
+<!-- PIE -->
 <footer class="footer">
   <div class="container footer__inner">
     <div>
@@ -361,17 +366,11 @@
   <p class="footer__copy">&copy; 2026 Adeliax</p>
 </footer>
 
-<!-- BOTONES FLOTANTES -->
-<div class="floating">
-  <a class="fab fab--mail" data-mail href="#contacto" aria-label="Enviar un correo a Adeliax">
-    <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="5" width="18" height="14" rx="2"/><path d="M3 7l9 6 9-6"/></svg>
-    <span class="fab__tip">¿Prefieres correo? Escríbeme aquí</span>
-  </a>
-  <a class="fab fab--wa" data-wa href="#contacto" aria-label="Escribir a Teresa por WhatsApp">
-    <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.6l-.4-.3-3.8 1.2 1.2-3.7-.3-.4a10.4 10.4 0 0 1-1.7-5.8C5.1 10 10 5.3 16 5.3S26.9 10 26.9 15.8 22 26.4 16 26.4zm6-7.8c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.5 5.5 4.9 2.7 1.1 3.3.9 3.9.8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.5z"/></svg>
-    <span class="fab__tip">¿Hablamos? Te respondo por WhatsApp</span>
-  </a>
-</div>
+<!-- BOTÓN FLOTANTE DE WHATSAPP -->
+<a class="fab" data-wa href="#contacto" aria-label="Escribir a Teresa por WhatsApp">
+  <svg viewBox="0 0 32 32" aria-hidden="true"><path fill="currentColor" d="M16 3C8.8 3 3 8.7 3 15.8c0 2.5.7 4.9 2 7L3 29l6.4-2c2 1.1 4.3 1.7 6.6 1.7 7.2 0 13-5.7 13-12.8S23.2 3 16 3zm0 23.4c-2.1 0-4.1-.6-5.9-1.6l-.4-.3-3.8 1.2 1.2-3.7-.3-.4a10.4 10.4 0 0 1-1.7-5.8C5.1 10 10 5.3 16 5.3S26.9 10 26.9 15.8 22 26.4 16 26.4zm6-7.8c-.3-.2-1.9-1-2.2-1-.3-.1-.5-.2-.7.2l-1 1.2c-.2.2-.4.2-.7.1-.3-.2-1.4-.5-2.6-1.6-1-.9-1.6-1.9-1.8-2.2-.2-.3 0-.5.1-.7l.5-.6.3-.5c.1-.2 0-.4 0-.6l-1-2.4c-.3-.6-.5-.5-.7-.5h-.6c-.2 0-.6.1-.9.4-.3.3-1.1 1.1-1.1 2.7s1.2 3.1 1.3 3.3c.2.2 2.3 3.5 5.5 4.9 2.7 1.1 3.3.9 3.9.8.6-.1 1.9-.8 2.2-1.5.3-.7.3-1.4.2-1.5-.1-.2-.3-.3-.6-.5z"/></svg>
+  <span class="fab__tip">¿Hablamos? Te respondo por WhatsApp</span>
+</a>
 
 <script>
   // ── CONFIGURACIÓN: cambia estos tres datos y se actualizan todos los botones ──
@@ -394,37 +393,7 @@
   document.querySelectorAll("[data-calendly]").forEach(a => {
     a.href = CALENDLY_URL;
   });
-
-  // Contador animado (+25)
-  const counters = document.querySelectorAll("[data-count]");
-  const runCounter = el => {
-    const end = +el.dataset.count, t0 = performance.now(), dur = 1400;
-    const tick = t => {
-      const k = Math.min((t - t0) / dur, 1), eased = 1 - Math.pow(1 - k, 3);
-      el.textContent = "+" + Math.round(end * eased);
-      if (k < 1) requestAnimationFrame(tick);
-    };
-    requestAnimationFrame(tick);
-  };
-  if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const co = new IntersectionObserver(entries => {
-      entries.forEach(e => { if (e.isIntersecting) { runCounter(e.target); co.unobserve(e.target); } });
-    }, { threshold: 0.6 });
-    counters.forEach(el => co.observe(el));
-  }
-
-  // Aparición suave de las secciones al hacer scroll
-  const items = document.querySelectorAll(".reveal");
-  if ("IntersectionObserver" in window && !matchMedia("(prefers-reduced-motion: reduce)").matches) {
-    const io = new IntersectionObserver(entries => {
-      entries.forEach(e => {
-        if (e.isIntersecting) { e.target.classList.add("is-visible"); io.unobserve(e.target); }
-      });
-    }, { threshold: 0.12 });
-    items.forEach(el => io.observe(el));
-  } else {
-    items.forEach(el => el.classList.add("is-visible"));
-  }
 </script>
+<script src="main.js" defer></script>
 </body>
 </html>
